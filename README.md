@@ -14,7 +14,7 @@ One thing to know, dont start all the nodes at once. When i started all 29 of th
 
 I started with the addressing before touching any device because i wanted it to look like a real network and not just random numbers. Every link between routers, or between a router and a switch, is a /30. Every VLAN is a /24. Loopbacks are /32. Branch-1 uses 10.1.x.x and HQ uses 172.16.x.x so its easy to tell which site you are looking at.
 
-There are three floor VLANs (10, 20, 30) and a management VLAN 99. Each floor has its own subnet, so VLAN 10 at Branch-1 is 10.1.1.0/24 and VLAN 10 at HQ is 172.16.1.0/24. The full list of every address is in docs/ip-plan.csv and every cable is in docs/cabling.csv.
+There are three floor VLANs (10, 20, 30) and a management VLAN 99. Each floor has its own subnet, so VLAN 10 at Branch-1 is 10.1.1.0/24 and VLAN 10 at HQ is 172.16.1.0/24. The full list of every address is in docs/ip-plan.txt and every cable is in docs/cabling.txt.
 
 Before i configured anything i also checked the cabling with CDP on every device and compared it to my plan. It sounds boring but it saved me from chasing problems later that were really just a cable in the wrong port.
 

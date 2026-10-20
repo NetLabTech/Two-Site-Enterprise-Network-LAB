@@ -1,0 +1,142 @@
+IP PLAN
+Every address in the lab, grouped by device. /30 on router links, /24 on VLANs, /32 on loopbacks.
+
+VLANs
+-----
+VLAN 10 floor 1:  Branch-1 10.1.1.0/24   HQ 172.16.1.0/24
+VLAN 20 floor 2:  Branch-1 10.1.2.0/24   HQ 172.16.2.0/24
+VLAN 30 floor 3:  Branch-1 10.1.3.0/24   HQ 172.16.3.0/24
+VLAN 99 management:  Branch-1 10.1.99.0/24   HQ 172.16.99.0/24
+Gateway for every VLAN is the HSRP virtual IP ending in .1
+
+ISP
+  Gi0/0       203.0.113.1/30       to-EDGE-R1-Gi0/2
+  Gi0/1       203.0.113.5/30       to-EDGE-R2-Gi0/2
+  Loopback0   192.0.2.1/32         ROUTER-ID
+  Loopback1   8.8.8.8/32           SIMULATED-INTERNET
+
+EDGE-R1
+  Gi0/1       10.1.255.1/30        to-CORE-R1-Gi0/1
+  Gi0/0       10.1.255.5/30        to-CORE-R2-Gi0/1
+  Gi0/2       203.0.113.2/30       to-ISP-Gi0/0
+  Loopback0   10.1.0.1/32          ROUTER-ID
+
+CORE-R1
+  Gi0/1       10.1.255.2/30        to-EDGE-R1-Gi0/1
+  Gi0/0       10.1.255.9/30        to-DSW1-Gi1/0
+  Gi0/2       10.1.255.13/30       to-DSW2-Gi1/2
+  Loopback0   10.1.0.2/32          ROUTER-ID
+
+CORE-R2
+  Gi0/1       10.1.255.6/30        to-EDGE-R1-Gi0/0
+  Gi0/0       10.1.255.17/30       to-DSW2-Gi1/0
+  Gi0/2       10.1.255.21/30       to-DSW1-Gi1/2
+  Loopback0   10.1.0.3/32          ROUTER-ID
+
+DSW1
+  Gi1/0       10.1.255.10/30       to-CORE-R1-Gi0/0
+  Gi1/2       10.1.255.22/30       to-CORE-R2-Gi0/2
+  Loopback0   10.1.0.11/32         ROUTER-ID
+  Vlan10      10.1.1.2/24          HSRP VIP 10.1.1.1
+  Vlan20      10.1.2.2/24          HSRP VIP 10.1.2.1
+  Vlan30      10.1.3.2/24          HSRP VIP 10.1.3.1
+  Vlan99      10.1.99.2/24         HSRP VIP 10.1.99.1
+
+DSW2
+  Gi1/2       10.1.255.14/30       to-CORE-R1-Gi0/2
+  Gi1/0       10.1.255.18/30       to-CORE-R2-Gi0/0
+  Loopback0   10.1.0.12/32         ROUTER-ID
+  Vlan10      10.1.1.3/24          HSRP VIP 10.1.1.1
+  Vlan20      10.1.2.3/24          HSRP VIP 10.1.2.1
+  Vlan30      10.1.3.3/24          HSRP VIP 10.1.3.1
+  Vlan99      10.1.99.3/24         HSRP VIP 10.1.99.1
+
+SW1
+  Vlan99      10.1.99.11/24        MGMT
+
+SW2
+  Vlan99      10.1.99.12/24        MGMT
+
+SW3
+  Vlan99      10.1.99.13/24        MGMT
+
+PC1
+  eth0        DHCP (10.1.1.100+)   from EDGE-R1 via relay
+
+PC2
+  eth0        DHCP (10.1.1.100+)   from EDGE-R1 via relay
+
+PC3
+  eth0        DHCP (10.1.2.100+)   from EDGE-R1 via relay
+
+PC4
+  eth0        DHCP (10.1.2.100+)   from EDGE-R1 via relay
+
+PC5
+  eth0        DHCP (10.1.3.100+)   from EDGE-R1 via relay
+
+PC6
+  eth0        DHCP (10.1.3.100+)   from EDGE-R1 via relay
+
+EDGE-R2
+  Gi0/0       172.16.255.1/30      to-CORE-R3-Gi0/1
+  Gi0/1       172.16.255.5/30      to-CORE-R4-Gi0/1
+  Gi0/2       203.0.113.6/30       to-ISP-Gi0/1
+  Loopback0   172.16.0.1/32        ROUTER-ID
+
+CORE-R3
+  Gi0/1       172.16.255.2/30      to-EDGE-R2-Gi0/0
+  Gi0/0       172.16.255.9/30      to-DSW3-Gi0/0
+  Gi0/2       172.16.255.13/30     to-DSW4-Gi1/2
+  Loopback0   172.16.0.2/32        ROUTER-ID
+
+CORE-R4
+  Gi0/1       172.16.255.6/30      to-EDGE-R2-Gi0/1
+  Gi0/0       172.16.255.17/30     to-DSW4-Gi0/0
+  Gi0/2       172.16.255.21/30     to-DSW3-Gi1/2
+  Loopback0   172.16.0.3/32        ROUTER-ID
+
+DSW3
+  Gi0/0       172.16.255.10/30     to-CORE-R3-Gi0/0
+  Gi1/2       172.16.255.22/30     to-CORE-R4-Gi0/2
+  Loopback0   172.16.0.11/32       ROUTER-ID
+  Vlan10      172.16.1.2/24        HSRP VIP 172.16.1.1
+  Vlan20      172.16.2.2/24        HSRP VIP 172.16.2.1
+  Vlan30      172.16.3.2/24        HSRP VIP 172.16.3.1
+  Vlan99      172.16.99.2/24       HSRP VIP 172.16.99.1
+
+DSW4
+  Gi1/2       172.16.255.14/30     to-CORE-R3-Gi0/2
+  Gi0/0       172.16.255.18/30     to-CORE-R4-Gi0/0
+  Loopback0   172.16.0.12/32       ROUTER-ID
+  Vlan10      172.16.1.3/24        HSRP VIP 172.16.1.1
+  Vlan20      172.16.2.3/24        HSRP VIP 172.16.2.1
+  Vlan30      172.16.3.3/24        HSRP VIP 172.16.3.1
+  Vlan99      172.16.99.3/24       HSRP VIP 172.16.99.1
+
+SW4
+  Vlan99      172.16.99.11/24      MGMT
+
+SW5
+  Vlan99      172.16.99.12/24      MGMT
+
+SW6
+  Vlan99      172.16.99.13/24      MGMT
+
+Ser1
+  eth0        172.16.1.11/24       static
+
+Ser2
+  eth0        172.16.1.12/24       static
+
+Ser3
+  eth0        172.16.2.11/24       static
+
+Ser4
+  eth0        172.16.2.12/24       static
+
+Ser5
+  eth0        172.16.3.11/24       static
+
+Ser6
+  eth0        172.16.3.12/24       static

@@ -1,0 +1,53 @@
+CABLING
+Every link in the lab, grouped by site. Format: device port to device port (what the link is).
+
+WAN (ISP to the two edge routers)
+---------------------------------
+ISP Gi0/0  to  EDGE-R1 Gi0/2   (WAN link, 203.0.113.0/30)
+ISP Gi0/1  to  EDGE-R2 Gi0/2   (WAN link, 203.0.113.4/30)
+
+Branch-1
+--------
+EDGE-R1 Gi0/1  to  CORE-R1 Gi0/1   (routed link, 10.1.255.0/30)
+EDGE-R1 Gi0/0  to  CORE-R2 Gi0/1   (routed link, 10.1.255.4/30)
+CORE-R1 Gi0/0  to  DSW1 Gi1/0   (routed link, 10.1.255.8/30)
+CORE-R1 Gi0/2  to  DSW2 Gi1/2   (routed link, 10.1.255.12/30)
+CORE-R2 Gi0/0  to  DSW2 Gi1/0   (routed link, 10.1.255.16/30)
+CORE-R2 Gi0/2  to  DSW1 Gi1/2   (routed link, 10.1.255.20/30)
+DSW1 Gi1/1  to  SW1 Et0/0   (trunk, VLANs 10,20,30,99)
+DSW1 Gi0/2  to  SW2 Et0/0   (trunk, VLANs 10,20,30,99)
+DSW1 Gi0/3  to  SW3 Et0/0   (trunk, VLANs 10,20,30,99)
+DSW1 Gi0/0  to  DSW2 Gi0/0   (LACP bundle Po1, two links between the distribution switches)
+DSW1 Gi0/1  to  DSW2 Gi0/1   (LACP bundle Po1, two links between the distribution switches)
+DSW2 Gi0/3  to  SW1 Et0/1   (trunk, VLANs 10,20,30,99)
+DSW2 Gi0/2  to  SW2 Et0/1   (trunk, VLANs 10,20,30,99)
+DSW2 Gi1/1  to  SW3 Et0/1   (trunk, VLANs 10,20,30,99)
+SW1 Et0/2  to  PC1 eth0   (access vlan 10)
+SW1 Et0/3  to  PC2 eth0   (access vlan 10)
+SW2 Et0/2  to  PC3 eth0   (access vlan 20)
+SW2 Et0/3  to  PC4 eth0   (access vlan 20)
+SW3 Et0/2  to  PC5 eth0   (access vlan 30)
+SW3 Et0/3  to  PC6 eth0   (access vlan 30)
+
+HQ
+--
+EDGE-R2 Gi0/0  to  CORE-R3 Gi0/1   (routed link, 172.16.255.0/30)
+EDGE-R2 Gi0/1  to  CORE-R4 Gi0/1   (routed link, 172.16.255.4/30)
+CORE-R3 Gi0/0  to  DSW3 Gi0/0   (routed link, 172.16.255.8/30)
+CORE-R3 Gi0/2  to  DSW4 Gi1/2   (routed link, 172.16.255.12/30)
+CORE-R4 Gi0/0  to  DSW4 Gi0/0   (routed link, 172.16.255.16/30)
+CORE-R4 Gi0/2  to  DSW3 Gi1/2   (routed link, 172.16.255.20/30)
+DSW3 Gi0/3  to  SW4 Et0/0   (trunk, VLANs 10,20,30,99)
+DSW3 Gi1/0  to  SW5 Et0/0   (trunk, VLANs 10,20,30,99)
+DSW3 Gi1/1  to  SW6 Et0/0   (trunk, VLANs 10,20,30,99)
+DSW3 Gi0/1  to  DSW4 Gi0/1   (LACP bundle Po1, two links between the distribution switches)
+DSW3 Gi0/2  to  DSW4 Gi0/2   (LACP bundle Po1, two links between the distribution switches)
+DSW4 Gi1/1  to  SW4 Et0/1   (trunk, VLANs 10,20,30,99)
+DSW4 Gi1/0  to  SW5 Et0/1   (trunk, VLANs 10,20,30,99)
+DSW4 Gi0/3  to  SW6 Et0/1   (trunk, VLANs 10,20,30,99)
+SW4 Et0/2  to  Ser1 eth0   (access vlan 10)
+SW4 Et0/3  to  Ser2 eth0   (access vlan 10)
+SW5 Et0/2  to  Ser3 eth0   (access vlan 20)
+SW5 Et0/3  to  Ser4 eth0   (access vlan 20)
+SW6 Et0/2  to  Ser5 eth0   (access vlan 30)
+SW6 Et0/3  to  Ser6 eth0   (access vlan 30)
