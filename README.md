@@ -4,6 +4,10 @@ So i wanted to build a proper enterprise network and not just a couple routers p
 
 The end result is two sites, Branch-1 and HQ, with a fake ISP sitting in the middle connecting them. Each site has an edge router, two core routers, two layer 3 distribution switches, and three access switches with PCs (Branch-1) or servers (HQ) plugged in. Its 17 network devices in total plus 12 endpoints. All the final configs are in the configs folder if you wanna look.
 
+![the finished lab in EVE-NG](images/topology.png)
+
+This is the finished lab in EVE-NG, with the two sites, the ISP in the middle and the VLANs boxed in by floor.
+
 ## What i used
 
 IOSv for the routers and the ISP, vIOS-L2 for the distribution switches (these can route when you turn on ip routing, so they act like layer 3 switches), and IOL L2 for the access switches because its way lighter on RAM. This is all on EVE-NG Community running on a VM with 16GB of RAM and 8 cores.
