@@ -1,8 +1,8 @@
 # Enterprise Network Lab (Branch + HQ) in EVE-NG
 
-So i wanted to build a proper enterprise network and not just a couple routers pinging each other. Most labs i had done before were small, like a router and a switch and a few PCs, and i wanted to see what it actually looks like when you build something that resembles a real company network. I found a campus design diagram with two sites, a bunch of core routers, distribution switches and access switches, and i thought ok lets try to build my own version of that in EVE-NG and get it working end to end.
+So i wanted to build a proper enterprise network and not just a couple routers pinging each other. Most labs i had done before were small, like a router and a switch and a few PCs, and i wanted to see what it actually looks like when you build something that resembles a real company network. Two sites, with a bunch of core routers, distribution switches and access switches, and i thought ok lets try to build that in EVE-NG and get it working end to end.
 
-The end result is two sites, Branch-1 and HQ, with a fake ISP sitting in the middle connecting them. Each site has an edge router, two core routers, two layer 3 distribution switches, and three access switches with PCs (Branch-1) or servers (HQ) plugged in. Its 17 network devices in total plus 12 endpoints. All the final configs are in the configs folder if you wanna look.
+The end result is two sites, Branch-1 and HQ, with an ISP sitting in the middle connecting them. Each site has an edge router, two core routers, two layer 3 distribution switches, and three access switches with PCs (Branch-1) or servers (HQ) plugged in. Its 17 network devices in total plus 12 endpoints. All the final configs are in the configs folder if you wanna take a look.
 
 ![the finished lab in EVE-NG](images/topology.png)
 
